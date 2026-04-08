@@ -1,0 +1,163 @@
+/*
+  Responsive patch (CSS only)
+  - Desktop: keep sidebar fixed (Bootstrap md+ layout)
+  - Mobile: sidebar becomes normal flow + horizontal scroll nav
+  Notes:
+  - Some templates include late <style> blocks and inline styles; we use !important in small-screen overrides.
+*/
+
+/* Base (desktop-friendly) */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#dashboard {
+  font-size: 13px;
+}
+
+.nav-link {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#navs a:hover {
+  background-color: #405dac;
+  border-radius: 5px;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(245, 245, 245, 0.2);
+}
+
+/* Sidebar */
+#header {
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+/* === Mobile-first overrides ===
+   We include max-device-width to remain useful even if meta viewport is missing. */
+@media (max-width: 767.98px), (max-device-width: 767.98px) {
+  /* Sidebar becomes top section */
+  #header {
+    position: static !important;
+    height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #header aside {
+    height: auto !important;
+  }
+
+  /* Nav becomes horizontal scroll (keeps all links accessible) */
+  #navs {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    gap: 0.25rem !important;
+    padding: 0.5rem 0.25rem !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #navs a.nav-link {
+    white-space: nowrap;
+    font-size: 14px !important;
+    padding: 0.5rem 0.6rem !important;
+  }
+
+  /* Logos in sidebar */
+  #navs img {
+    width: 120px !important;
+    height: auto !important;
+    margin: 0.25rem auto !important;
+  }
+
+  /* Main content padding */
+  main.container-fluid {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Top bar wraps instead of overflowing */
+  #dashboard [role="alert"] {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  #dashboard [role="alert"] h4 {
+    font-size: 1rem !important;
+    margin: 0 !important;
+    flex: 1 1 auto;
+  }
+
+  #dashboard [role="alert"] ul.nav {
+    width: 100%;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 0.25rem !important;
+    padding-left: 0 !important;
+  }
+
+  /* Stat cards: stack vertically */
+  #dashboard .d-flex.gap-4.shadow-lg {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  #dashboard .stat-card {
+    width: 100% !important;
+  }
+
+  /* Home "Footer" cards group */
+  #Footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* Button groups: allow wrapping */
+  .d-flex.gap-1,
+  .d-flex.gap-3,
+  .d-flex.justify-content-start.align-items-center.gap-4 {
+    flex-wrap: wrap !important;
+  }
+
+  /* Equipment search input has inline min-width: 300px; override on small screens */
+  input[style*="min-width: 300px"] {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  form .d-flex.align-items-center.gap-2 {
+    flex-wrap: wrap !important;
+    width: 100%;
+  }
+
+  /* Login page uses w-25; make it usable on mobile */
+  form.w-25 {
+    width: 100% !important;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Tablet tweaks (optional): reduce cramped header items a bit */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .nav-link {
+    font-size: 15px;
+  }
+}
