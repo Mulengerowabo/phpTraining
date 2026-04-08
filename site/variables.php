@@ -14,6 +14,7 @@ $users = [
         'full_name' => 'Laurène Castor',
         'email' => 'laurene.castor@exemple.com',
         'age' => 28,
+        'password' => 'aurienne'
     ],
 ];
 
